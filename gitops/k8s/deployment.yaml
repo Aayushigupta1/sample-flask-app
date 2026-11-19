@@ -6,7 +6,7 @@ metadata:
   labels:
     app: gitops-sample-flask-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: gitops-sample-flask-app
@@ -20,3 +20,9 @@ spec:
           image: aayushigupta16/sample-flask-app:latest
           ports:
             - containerPort: 5000
+          env:
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: flask-app-secret
+                  key: API_TOKEN
